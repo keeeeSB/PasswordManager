@@ -12,16 +12,17 @@ while true; do
   case "$choice" in
 
     "Add Password")
+
+      if [ -f "$ENCRYPTED_FILE" ]; then
+        gpg "$ENCRYPTED_FILE"
+      fi
+
       echo "サービス名を入力してください："
       read -r service
       echo "ユーザー名を入力してください："
       read -r username
       echo "パスワードを入力してください："
       read -r password
-
-      if [-f "$ENCRYPTED_FILE" ]; then
-        gpg "$ENCRYPTED_FILE"
-      fi
 
       echo "${service}:${username}:${password}" >> "$DATA_FILE"
 
